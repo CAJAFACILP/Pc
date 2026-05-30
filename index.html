@@ -5,252 +5,603 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Página</title>
     <link rel="stylesheet" href="base.css">
+        <!-- Evitar caché y restauración automática de formularios -->
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
 </head>
 <body>
-    <div class="headweb">
-        <header id="header">
-            <!-- LOGO DE CAJA FACIL -->
-            <img class="logo" src="https://github.com/AdvanceVini/PaginaCAJAFACIL/blob/main/LOGO.jpg?raw=true" alt="Logo">
+    <div class="app-container">
+        <header class="top-bar">
+            <h1 class="logo"><span class="caja">CAJA</span><span class="facil">FÁCIL</span></h1>
+            <div class="menu-icon">☰</div>
         </header>
-    </div>
-    <div class="main-container">
-        <div class="container1">
-            <div class="notas">
-                <h2 style="text-align: center;">NOTAS</h2>
-                <div style="width: 100%; margin: 0 auto; text-align: center;">
-                    <textarea id="notas" rows="10" cols="40"></textarea>
-                    <!-- Botones para cambiar el tamaño del cuadro de texto -->
-                    <div style="margin-top: 10px;">
-                        <button onclick="cambiarTamaño('pequeño')">Pequeño</button>
-                        <button onclick="cambiarTamaño('mediano')">Mediano</button>
-                        <button onclick="cambiarTamaño('grande')">Grande</button>
-                    </div>
-                </div>
+
+        <!-- Overlay de menú naranja claro (inicialmente oculto) -->
+        <div id="menuOverlay" class="menu-overlay" aria-hidden="true">
+            <div class="menu-inner" role="dialog" aria-modal="true" aria-label="Menú principal">
+                <button class="menu-close" aria-label="Cerrar menú">×</button>
+                <nav class="menu-buttons" aria-label="Opciones">
+                    <button class="menu-btn">MUY PRONTO</button>
+                    <button class="menu-btn">MUY PRONTO</button>
+                    <button class="menu-btn">MUY PRONTO</button>
+                    <button class="menu-btn">MUY PRONTO</button>
+                    <button id="menuSaveBtn" class="menu-btn menu-btn-save">Guardar los datos</button>
+                </nav>
             </div>
-            <div class="inventario">
-                <div id="contador-inventario">
-                    <h2>CONTADOR DE INVENTARIO</h2>
-                    <br /><br />
-                    <input type="text" id="nombre" placeholder="Nombre del producto" />
-                    <br /><br />
-                    <input type="number" id="cantidad" placeholder="Cantidad" min="0" />
-                    <br /><br />
-                    <button id="agregar" onclick="agregarElemento()">Agregar</button>
-                    <button id="borrarLista" onclick="borrarLista()">Borrar</button> <!-- Botón para borrar el último elemento -->
-                    <ul id="listaElementos"></ul>
-                    <p><strong><span id="etiquetaCantidad">Cantidad total:</span> <span id="cantidadTotal">0</span> <span id="etiquetaUnidades">unidades</span></strong></p>
-                </div>
-            </div>
-            <div class="caja">
-                <div id="containerTO">
-                    <br /><br />
-                    <h2>CIERRE DE CAJA</h2>
-                    <br /><br />
-                    <div id="contador-personalizado">
-                        <input type="text" id="nombreP" placeholder="Nombre" /><br /><br />
-                        <input type="number" id="valorP" placeholder="Valor" /><br /><br />
-                        <button id="agregarP" onclick="agregarElementoP()">Agregar</button>
-                        <button id="borrarListaP" onclick="borrarListaP()">Borrar</button>
-                        <ul id="listaElementosP"></ul>
-                        <p><strong><span id="etiquetaValor">TOTAL:</span> <span id="valorTotalP">0.00</span> <span id="etiquetaSoles">SOLES</span></strong></p>
-                        <br /><br />
-                    </div>
-                </div>
-            </div>
-            <div class="imagenes">IMÁGENES</div>
-            <div class="rectangulo"></div>
         </div>
-        <div class="container2">
-            <div class="hora">
+
+        <main class="content">
+
+        <div class="card red">
+            <h2>CALENDARIO</h2>
+            <div class="subcard">
+                
                 <div id="calendar">
-                    <h2>CALENDARIO</h2>
                     <p id="date"></p>
                     <p id="clock"></p>
+                    <p id="timezone"></p>
                 </div>
             </div>
-            <div class="monedas">
-                <div class="container">
-                    <h2>CONTADOR DE MONEDAS</h2>
-                    <label>Monedas de 10 céntimos: <input type="number" id="cent10" class="moneda" value="" /></label><br />
-                    <label>Monedas de 20 céntimos: <input type="number" id="cent20" class="moneda" value="" /></label><br />
-                    <label>Monedas de 50 céntimos: <input type="number" id="cent50" class="moneda" value="" /></label><br />
-                    <label>Monedas de 1 sol: <input type="number" id="SOL01" class="moneda" value="" /></label><br />
-                    <label>Monedas de 2 soles: <input type="number" id="SOL02" class="moneda" value="" /></label><br />
-                    <label>Monedas de 5 soles: <input type="number" id="SOL05" class="moneda" value="" /></label><br />
-                    <label>Billetes de 10 soles: <input type="number" id="SOL10" class="moneda" value="" /></label><br />
-                    <label>Billetes de 20 soles: <input type="number" id="SOL20" class="moneda" value="" /></label><br />
-                    <label>Billetes de 50 soles: <input type="number" id="SOL50" class="moneda" value="" /></label><br />
-                    <label>Billetes de 100 soles: <input type="number" id="SOL100" class="moneda" value="" /></label><br />
-                    <label>Billetes de 200 soles: <input type="number" id="SOL200" class="moneda" value="" /></label><br />
-                    <div class="total">
-                        <p><strong>Valor total: S/ <span id="valorTotalCentavos">0.00</span></strong></p>
+
+        </div>
+
+            <div class="card green">
+                <h2>Contador de Monedas</h2>
+
+                <div class="subcard contador-card">
+                    
+
+                    <div class="monedas-grid">
+
+                        <div class="fila">
+                            <label>S/0.10 centi </label>
+                            <input type="number" id="cent10" value="" min="0">
+                        </div>
+
+                        <div class="fila">
+                            <label>S/10 Soles</label>
+                            <input type="number" id="SOL10" value="" min="0">
+                        </div>
+
+                        <div class="fila">
+                            <label>S/0.20 centi</label>
+                            <input type="number" id="cent20" value="" min="0">
+                        </div>
+                        
+                        <div class="fila">
+                            <label>S/20 Soles</label>
+                            <input type="number" id="SOL20" value="" min="0">
+                        </div>
+
+                        <div class="fila">
+                            <label>S/0.50 centi</label>
+                            <input type="number" id="cent50" value="" min="0">
+                        </div>
+
+                        <div class="fila">
+                            <label>S/50 Soles</label>
+                            <input type="number" id="SOL50" value="" min="0">
+                        </div>
+
+
+                        <div class="fila">
+                            <label>S/1Sol</label>
+                            <input type="number" id="SOL01" value="" min="0">
+                        </div>
+                
+                        <div class="fila">
+                            <label>S/100 Soles</label>
+                            <input type="number" id="SOL100" value="" min="0">
+                        </div>
+
+                        <div class="fila">
+                            <label>S/2 Soles</label>
+                            <input type="number" id="SOL02" value="" min="0">
+                        </div>
+
+                        <div class="fila">
+                            <label>S/200 Soles</label>
+                            <input type="number" id="SOL200" value="" min="0">
+                        </div>
+
+                        <div class="fila">
+                            <label>S/5 Soles</label>
+                            <input type="number" id="SOL05" value="" min="0">
+                        </div>
+                    </div>
+
+                    <div class="resultado">
+                        Total: S/ <span id="valorTotalCentavos">0.00</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card blue">
+                <h2>CAJERO</h2>
+                     <div class="subcard">
+                     <div id="contador-personalizado">
+                        <input type="text" id="nombreP" placeholder="Nombre" />
+                        <br /><br />
+                        <input type="number" id="valorP" placeholder="Valor" step="0.01" />
+                        <br /><br />
+                        <button id="agregarP">Agregar</button>
+                        <button id="borrarListaP">Borrar</button>
+                        <div class="personal-results">
+                            <ul id="listaElementosP"></ul>
+                            <p><strong><span id="etiquetaValor">TOTAL:</span> S/ <span id="valorTotalP">0.00</span> <span id="etiquetaSoles">SOLES</span></strong></p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="extra1">EXTRA 1</div>
-            <div class="extra2">EXTRA 2</div>
-        </div>
+
+            <div class="card dark">
+                <h2>NOTAS</h2>
+                <div class="subcard">
+                    <div class="contenedor-notas">
+                        <textarea id="notas" placeholder="Escribe aquí..."></textarea>
+
+                        <div class="botones-container">
+                            <button id="btnPeq">Pequeño</button>
+                            <button id="btnMed">Mediano</button>
+                            <button id="btnGran">Grande</button>
+                            <button id="btnAuto" style="background-color: #28a745; color: white;">Auto</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <footer class="footer">
+            © 2025 Caja FácilP — Todos los derechos reservados
+        </footer>
+
     </div>
-    <div class="pie">PIE DE PAGINA</div>
-    
-    <!-- Scripts -->
+
     <script>
-        // Función para ajustar automáticamente la altura del textarea al escribir
-        function ajustarAltura() {
-            const textarea = document.getElementById('notas');
-            textarea.style.height = 'auto';
-            const nuevaAltura = textarea.scrollHeight;
-            textarea.style.height = nuevaAltura <= 1000 ? `${nuevaAltura}px` : '1000px';
-        }
+        (function(){
+            const map = {
+                cent10: 0.10, cent20: 0.20, cent50: 0.50,
+                SOL01: 1, SOL02: 2, SOL05: 5, SOL10: 10,
+                SOL20: 20, SOL50: 50, SOL100: 100, SOL200: 200
+            };
 
-        document.getElementById('notas').addEventListener('input', ajustarAltura);
+            const inputs = Object.keys(map).map(id => document.getElementById(id));
+            const out = document.getElementById('valorTotalCentavos');
 
-        // Función para cambiar el tamaño del cuadro de texto con los botones
-        function cambiarTamaño(tamaño) {
-            const textarea = document.getElementById('notas');
-            if (tamaño === 'pequeño') {
-                textarea.style.width = '286px';
-                textarea.style.height = '248px';
-            } else if (tamaño === 'mediano') {
-                textarea.style.width = '600px';
-                textarea.style.height = '470px';
-            } else if (tamaño === 'grande') {
-                textarea.style.width = '530px';
-                textarea.style.height = '1050px';
+            function calcular(){
+                let total = 0;
+                for(const id in map){
+                    const el = document.getElementById(id);
+                    if(!el) continue;
+                    const val = Number(el.value) || 0;
+                    total += val * map[id];
+                }
+                out.textContent = total.toFixed(2);
             }
-        }
 
-        // Variables para el contador de inventario
-        const nombre = document.getElementById('nombre');
-        const cantidad = document.getElementById('cantidad');
-        const listaElementos = document.getElementById('listaElementos');
-        let elementos = [];
-
-        function agregarElemento() {
-            const nombreProducto = nombre.value.trim();
-            const cantidadProducto = parseInt(cantidad.value);
-            if (nombreProducto && !isNaN(cantidadProducto) && cantidadProducto >= 0) {
-                elementos.push({ nombre: nombreProducto, cantidad: cantidadProducto });
-                actualizarLista();
-                calcularCantidadTotal();
-                nombre.value = '';
-                cantidad.value = '';
-            } else {
-                alert("Por favor ingresa un nombre válido y una cantidad mayor o igual a 0.");
-            }
-        }
-
-        function borrarLista() {
-            if (elementos.length > 0) {
-                elementos.pop();
-                actualizarLista();
-                calcularCantidadTotal();
-            }
-        }
-
-        function actualizarLista() {
-            listaElementos.innerHTML = '';
-            elementos.forEach((elemento) => {
-                const li = document.createElement('li');
-                li.textContent = `${elemento.nombre}: ${elemento.cantidad}`;
-                listaElementos.appendChild(li);
+            // agregar listeners
+            inputs.forEach(inp => {
+                if(!inp) return;
+                inp.addEventListener('input', calcular);
+                inp.addEventListener('change', calcular);
             });
-        }
 
-        function calcularCantidadTotal() {
-            const total = elementos.reduce((sum, elem) => sum + elem.cantidad, 0);
-            document.getElementById('cantidadTotal').textContent = total;
-        }
+            // calcular una vez al cargar
+            calcular();
+        })();
+    </script>
 
-        // Variables para el cierre de caja
-        const nombreP = document.getElementById('nombreP');
-        const valorP = document.getElementById('valorP');
-        const listaElementosP = document.getElementById('listaElementosP');
-        let elementosP = [];
-
-        function agregarElementoP() {
-            const nombre = nombreP.value.trim();
-            const valor = parseFloat(valorP.value);
-            if (nombre && !isNaN(valor)) {
-                elementosP.push({ nombre, valor });
-                actualizarListaP();
-                calcularValorTotalP();
-                nombreP.value = '';
-                valorP.value = '';
-            } else {
-                alert('Por favor, ingresa un nombre y un valor numérico válido.');
-            }
-        }
-
-        function borrarListaP() {
-            if (elementosP.length > 0) {
-                elementosP.pop();
-                actualizarListaP();
-                calcularValorTotalP();
-            }
-        }
-
-        function actualizarListaP() {
-            listaElementosP.innerHTML = '';
-            elementosP.forEach((elemento) => {
-                const li = document.createElement('li');
-                li.textContent = `${elemento.nombre}: ${elemento.valor.toFixed(2)}`;
-                listaElementosP.appendChild(li);
-            });
-        }
-
-        function calcularValorTotalP() {
-            const total = elementosP.reduce((sum, elem) => sum + elem.valor, 0);
-            document.getElementById('valorTotalP').textContent = total.toFixed(2);
-        }
-
-        // Función para actualizar la fecha y hora
-        function updateDateTime() {
+    <script>
+        // Actualiza la fecha y la hora en el cuadro de calendario
+        function updateDateTime(){
             const currentDate = new Date();
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             const dateStr = currentDate.toLocaleDateString('es-ES', options);
             const timeStr = currentDate.toLocaleTimeString('es-ES');
-            document.getElementById('date').textContent = dateStr;
-            document.getElementById('clock').textContent = timeStr;
+
+            const dateEl = document.getElementById('date');
+            const clockEl = document.getElementById('clock');
+            if(dateEl) dateEl.textContent = dateStr;
+            if(clockEl) clockEl.textContent = timeStr;
         }
 
-        setInterval(updateDateTime, 1000);
+        // Inicializar y actualizar cada segundo
         updateDateTime();
-
-        // Variables y función para el contador de monedas
-        const valoresMonedas = {
-            cent10: 0.10,
-            cent20: 0.20,
-            cent50: 0.50,
-            SOL01: 1.00,
-            SOL02: 2.00,
-            SOL05: 5.00,
-            SOL10: 10.00,
-            SOL20: 20.00,
-            SOL50: 50.00,
-            SOL100: 100.00,
-            SOL200: 200.00
-        };
-
-        function recalcularValorTotal() {
-            let totalCentavos = 0;
-            for (const id in valoresMonedas) {
-                const inputElement = document.getElementById(id);
-                let cantidad = parseInt(inputElement.value) || 0;
-                if (cantidad < 0) {
-                    inputElement.value = 0;
-                    cantidad = 0;
-                }
-                totalCentavos += cantidad * valoresMonedas[id];
-            }
-            document.getElementById('valorTotalCentavos').textContent = totalCentavos.toFixed(2);
-        }
-
-        Object.keys(valoresMonedas).forEach(id => {
-            document.getElementById(id).addEventListener('input', recalcularValorTotal);
-        });
-
-        recalcularValorTotal();
+        setInterval(updateDateTime, 1000);
     </script>
+
+    <script>
+        // Contador personalizado (card blue)
+        (function(){
+            const nombreP = document.getElementById('nombreP');
+            const valorP = document.getElementById('valorP');
+            const listaElementosP = document.getElementById('listaElementosP');
+            const valorTotalPEl = document.getElementById('valorTotalP');
+            let elementosP = [];
+
+            function actualizarListaP(){
+                listaElementosP.innerHTML = '';
+                elementosP.forEach((elemento) => {
+                    const li = document.createElement('li');
+                    li.textContent = `${elemento.nombre}: S/ ${elemento.valor.toFixed(2)}`;
+                    listaElementosP.appendChild(li);
+                });
+            }
+
+            function calcularValorTotalP(){
+                const total = elementosP.reduce((sum, e) => sum + e.valor, 0);
+                if(valorTotalPEl) valorTotalPEl.textContent = 'S/ ' + total.toFixed(2);
+            }
+
+            function agregarElementoP(){
+                const nombre = nombreP.value ? nombreP.value.trim() : '';
+                const valor = parseFloat(valorP.value);
+                if(nombre && !isNaN(valor)){
+                    elementosP.push({ nombre, valor });
+                    actualizarListaP();
+                    calcularValorTotalP();
+                    nombreP.value = '';
+                    valorP.value = '';
+                    nombreP.focus();
+                } else {
+                    alert('Por favor, ingresa un nombre y un valor numérico válido.');
+                }
+            }
+
+            function borrarListaP(){
+                if(elementosP.length > 0){
+                    elementosP.pop();
+                    actualizarListaP();
+                    calcularValorTotalP();
+                }
+            }
+
+            // listeners para botones
+            const btnAgregar = document.getElementById('agregarP');
+            const btnBorrar = document.getElementById('borrarListaP');
+            if(btnAgregar) btnAgregar.addEventListener('click', agregarElementoP);
+            if(btnBorrar) btnBorrar.addEventListener('click', borrarListaP);
+
+            // permitir Enter en el campo valor para agregar
+            if(valorP){
+                valorP.addEventListener('keydown', (e) => {
+                    if(e.key === 'Enter') agregarElementoP();
+                });
+            }
+        })();
+    </script>
+
+    <script>
+        // Lógica para abrir/cerrar el overlay de menú
+        (function(){
+            // Guardamos el último elemento que tuvo foco para restaurarlo después
+            window._lastFocusedElement = null;
+            document.addEventListener('focusin', function(e){
+                // sólo trackear elementos focusables dentro del app
+                const t = e.target;
+                if(t && (t.matches('input, textarea, button') )){
+                    window._lastFocusedElement = t;
+                }
+            }, true);
+            const menuIcon = document.querySelector('.menu-icon');
+            const overlay = document.getElementById('menuOverlay');
+            if(!menuIcon || !overlay) return;
+
+            const closeBtn = overlay.querySelector('.menu-close');
+            const firstBtn = overlay.querySelector('.menu-btn');
+
+            function openMenu(){
+                overlay.classList.add('open');
+                overlay.setAttribute('aria-hidden','false');
+                document.body.style.overflow = 'hidden';
+                // enfocar primer botón para accesibilidad
+                if(firstBtn) firstBtn.focus();
+            }
+
+            function closeMenu(){
+                overlay.classList.remove('open');
+                overlay.setAttribute('aria-hidden','true');
+                document.body.style.overflow = '';
+                menuIcon.focus();
+            }
+
+            menuIcon.addEventListener('click', (e) => { e.preventDefault(); openMenu(); });
+            if(closeBtn) closeBtn.addEventListener('click', closeMenu);
+
+            // cerrar si el usuario hace click fuera del contenido
+            overlay.addEventListener('click', (e) => { if(e.target === overlay) closeMenu(); });
+
+            // cerrar con Escape
+            window.addEventListener('keydown', (e) => { if(e.key === 'Escape' && overlay.classList.contains('open')) closeMenu(); });
+
+            // botón 'Guardar los datos' (prepara vista imprimible y abre diálogo de impresión)
+            const menuSaveBtn = document.getElementById('menuSaveBtn');
+            if(menuSaveBtn){
+                menuSaveBtn.addEventListener('click', (ev) => {
+                    ev.preventDefault();
+                    closeMenu();
+                    generatePrintableSnapshot();
+                });
+            }
+
+            // botones 'MUY PRONTO' - mostrar aviso de guardar en PDF (solo una vez por sesión)
+            let avisoMostrado = false;
+            const muyProntoBtns = overlay.querySelectorAll('.menu-btn:not(#menuSaveBtn)');
+            muyProntoBtns.forEach(btn => {
+                btn.addEventListener('click', (ev) => {
+                    ev.preventDefault();
+                    if(!avisoMostrado){
+                        alert('⚠️ RECUERDA: Antes de continuar, guarda tus datos en PDF usando el botón "Guardar los datos".\n\nLos datos se perderán si cambias de pestaña o cierras la página sin guardar.');
+                        avisoMostrado = true;
+                        // Cambiar el texto para indicar que ya se mostró el aviso
+                        btn.textContent = 'EN DESARROLLO';
+                        btn.style.opacity = '0.6';
+                    } else {
+                        // Después del primer aviso, permitir que el botón funcione normalmente
+                        // (por ahora no hace nada, pero podría redirigir a futuras funcionalidades)
+                        console.log('Botón presionado después del aviso');
+                    }
+                });
+            });
+
+            function escapeHtml(str){
+                if(!str) return '';
+                return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+            }
+
+            function generatePrintableSnapshot(){
+                try{
+                    // Recolectar datos visibles
+                    const date = document.getElementById('date')?.textContent || '';
+                    const clock = document.getElementById('clock')?.textContent || '';
+                    const timezone = document.getElementById('timezone')?.textContent || '';
+
+                    // recolectar monedas y normalizar valor numérico para ordenar
+                    const monedas = Array.from(document.querySelectorAll('.monedas-grid .fila')).map(f => {
+                        const label = f.querySelector('label')?.textContent?.trim() || '';
+                        const value = f.querySelector('input')?.value || '0';
+                        // extraer número del label (ej. 'S/0.10 centi' -> 0.10)
+                        const m = (label.match(/[0-9]+(?:[.,][0-9]+)?/) || [])[0] || '0';
+                        const num = parseFloat(String(m).replace(',', '.')) || 0;
+                        return { label, value, num };
+                    });
+
+                    // ordenar ascendente por el valor numérico (de monedas/billetes)
+                    monedas.sort((a, b) => a.num - b.num);
+
+                    const totalMonedas = document.getElementById('valorTotalCentavos')?.textContent || '';
+
+                    const elementos = Array.from(document.querySelectorAll('#listaElementosP li')).map(li => li.textContent.trim());
+                    const totalPersonal = document.getElementById('valorTotalP')?.textContent || '';
+
+                    const notas = document.getElementById('notas')?.value || '';
+
+                    const content = `
+                        <!doctype html>
+                        <html>
+                        <head>
+                            <meta charset="utf-8">
+                            <title>Resumen: Caja Fácil</title>
+                            <style>
+                                body{font-family: Arial, Helvetica, sans-serif; color:#222; padding:18px}
+                                h1{font-size:20px;margin:0 0 10px}
+                                .meta{font-size:13px;color:#666}
+                                .section{margin-top:12px; border: 2px solid #000; border-radius: 8px; padding: 12px; background: #fff;}
+                                .moneda{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #eee}
+                                ul.personal{padding-left:0;list-style:none}
+                                pre.notas{white-space:pre-wrap;background:#f9f9f9;border:1px solid #eee;padding:8px;border-radius:6px}
+                                /* QUITAR saltos de página y reducir márgenes para que no queden espacios en blanco al exportar a PDF */
+                                .page-break{ display:none; }
+                                @media print{
+                                    /* evitar espacios grandes entre secciones */
+                                    body{ margin:8px; }
+                                    .section{ margin-top:6px; margin-bottom:6px; border: 1px solid #000; padding: 8px; }
+                                    .moneda{ padding:4px 0; }
+                                    pre.notas{ padding:8px; }
+                                    /* no forzar salto de página para las notas en la versión de impresión */
+                                    .notes-page{ page-break-before: auto; break-before: auto; }
+                                }
+                            </style>
+                        </head>
+                        <body>
+                            <h1>Caja Fácil — Resumen imprimible</h1>
+                            <div class="meta">Fecha: ${escapeHtml(date)} — Hora: ${escapeHtml(clock)} ${timezone? '('+escapeHtml(timezone)+')':''}</div>
+
+                            <!-- NOTAS mostradas PRIMERO en la vista imprimible (solo aquí) -->
+                            <div class="section notes-page">
+                                <h2>Notas</h2>
+                                <pre class="notas">${escapeHtml(notas)}</pre>
+                            </div>
+
+                            <div class="section">
+                                <h2>Contador de monedas</h2>
+                                ${monedas.map(m=>`<div class="moneda"><div>${escapeHtml(m.label)}</div><div>${escapeHtml(m.value)}</div></div>`).join('')}
+                                <div style="margin-top:8px;font-weight:bold">Total: ${escapeHtml(totalMonedas)}</div>
+                            </div>
+
+                            <div class="section">
+                                <h2>Contador personalizado</h2>
+                                <ul class="personal">${elementos.map(e=>`<li>${escapeHtml(e)}</li>`).join('')}</ul>
+                                <div style="margin-top:8px;font-weight:bold">Total: ${escapeHtml(totalPersonal)}</div>
+                            </div>
+                        </body>
+                        </html>`;
+
+                    // Intentar abrir nueva ventana
+                    const w = window.open('', '_blank');
+                    if(w){
+                        w.document.open();
+                        w.document.write(content + '<script>window.onload=function(){ try{ window.focus(); window.print(); }catch(e){} }<\/script>');
+                        w.document.close();
+                        // Restaurar foco en el elemento previamente enfocado (si existe)
+                        setTimeout(()=>{
+                            try{ if(window._lastFocusedElement && window._lastFocusedElement.focus) window._lastFocusedElement.focus(); }catch(e){}
+                        }, 300);
+                        return;
+                    }
+
+                    // Si popup bloqueado: fallback con iframe temporal
+                    const iframe = document.createElement('iframe');
+                    iframe.style.position = 'fixed';
+                    iframe.style.left = '-9999px';
+                    iframe.style.top = '0';
+                    iframe.style.width = '0';
+                    iframe.style.height = '0';
+                    iframe.style.border = '0';
+                    document.body.appendChild(iframe);
+
+                    if('srcdoc' in iframe){
+                        iframe.srcdoc = content;
+                    }else{
+                        const doc = iframe.contentDocument || iframe.contentWindow.document;
+                        doc.open(); doc.write(content); doc.close();
+                    }
+
+                    iframe.onload = function(){
+                        try{
+                            const iw = iframe.contentWindow || iframe;
+                            iw.focus();
+                            iw.print();
+                        }catch(e){ console.error(e); }
+                        setTimeout(()=>{ try{ document.body.removeChild(iframe); }catch(e){} }, 800);
+                        // Restaurar foco después del print
+                        setTimeout(()=>{ try{ if(window._lastFocusedElement && window._lastFocusedElement.focus) window._lastFocusedElement.focus(); }catch(e){} }, 900);
+                    };
+                }catch(e){ console.error(e); alert('No se pudo preparar la impresión. Revisa tu bloqueador de popups.'); }
+            }
+        })();
+    </script>
+
+    <script>
+        // Protección contra cierre/recarga accidental y evitar persistencia de datos
+        (function(){
+            // Comprueba si hay datos escritos que podrían perderse
+            function isDirty(){
+                try{
+                    // Notas
+                    const notas = document.getElementById('notas');
+                    if(notas && notas.value.trim() !== '') return true;
+
+                    // Contador personalizado: lista con elementos
+                    const lista = document.getElementById('listaElementosP');
+                    if(lista && lista.children.length > 0) return true;
+
+                    // Entradas numéricas (contadores de monedas)
+                    const coinInputs = document.querySelectorAll('input[type="number"]');
+                    for(const inp of coinInputs){
+                        if(inp.id && inp.value !== '' && Number(inp.value) !== 0) return true;
+                    }
+                }catch(e){ /* ignorar errores */ }
+                return false;
+            }
+
+            // Antes de descargar la página: preguntar si hay datos
+            window.addEventListener('beforeunload', function(e){
+                if(isDirty()){
+                    // La mayoría de navegadores ignorarán el mensaje personalizado y mostrarán su propio diálogo.
+                    const confirmationMessage = '⚠️ ATENCIÓN: Tienes datos sin guardar en PDF. ¿Seguro que quieres salir y perder toda tu información? Usa el botón "Guardar los datos" del menú para crear un PDF antes de continuar.';
+                    (e || window.event).returnValue = confirmationMessage;
+                    return confirmationMessage;
+                }
+                // Si no hay datos, permitir la navegación sin aviso
+            });
+
+            // Evitar que el navegador restaure valores de formularios tras recarga/back-forward
+            window.addEventListener('pageshow', function(event){
+                const navEntries = performance.getEntriesByType && performance.getEntriesByType('navigation');
+                const navType = (navEntries && navEntries[0] && navEntries[0].type) || (performance.navigation && performance.navigation.type);
+                // navType === 'reload' (or numeric 1) indica recarga
+                if(event.persisted || navType === 'reload' || navType === 1){
+                    try{
+                        // Borrar valores en inputs y textarea para evitar restauración
+                        const fields = document.querySelectorAll('input, textarea');
+                        fields.forEach(f => {
+                            if(f.matches('input[type="hidden"]')) return;
+                            f.value = '';
+                        });
+                        // limpiar lista de elementos temporales en DOM (si se desea)
+                        const lista = document.getElementById('listaElementosP');
+                        if(lista) lista.innerHTML = '';
+                    }catch(e){}
+                }
+            });
+
+            // GUARDAR/RESTAURAR datos al cambiar de pestaña para mantener información
+            // FUNCIONES DE GUARDADO/RESTAURACIÓN REMOVIDAS
+            // El guardado automático no funciona bien en móviles
+            // Ahora usamos avisos preventivos en su lugar
+
+            // REMOVIDO: El guardado automático al cambiar de pestaña no funciona bien en móviles
+            // En su lugar, usamos avisos en los botones y beforeunload
+
+            // Al descargar la página (cuando ya se confirma salida) limpiar storages para no persistir nada
+            window.addEventListener('unload', function(){
+                try{ sessionStorage.clear(); localStorage.clear(); }catch(e){}
+            });
+
+            // Desactivar autocomplete en todos los inputs/textarea al cargar (evita algunos autocompletes)
+            document.addEventListener('DOMContentLoaded', function(){
+                const fields = document.querySelectorAll('input, textarea');
+                fields.forEach(f => {
+                    try{ f.setAttribute('autocomplete', 'off'); }catch(e){}
+                });
+            });
+        })();
+    </script>
+
+    <script>
+        // Block de NOTAS - funciones para cambiar tamaño y auto-ajuste
+        (function(){
+            const textarea = document.getElementById('notas');
+            const btnPeq = document.getElementById('btnPeq');
+            const btnMed = document.getElementById('btnMed');
+            const btnGran = document.getElementById('btnGran');
+            const btnAuto = document.getElementById('btnAuto');
+            let modoManual = false;
+
+            function cambiarClase(clase){
+                modoManual = true;
+                textarea.classList.remove('tamano-pequeno','tamano-mediano','tamano-grande');
+                textarea.classList.add(clase);
+                textarea.style.height = '';
+            }
+
+            function resetearAuto(){
+                modoManual = false;
+                textarea.classList.remove('tamano-pequeno','tamano-mediano','tamano-grande');
+                ajustarAltura();
+            }
+
+            (function(){
+                // Optimizar ajuste de altura: usar requestAnimationFrame y debounce
+                let rafId = null;
+                function ajustarAltura(){
+                    if(rafId) cancelAnimationFrame(rafId);
+                    rafId = requestAnimationFrame(() => {
+                        if(!modoManual && textarea){
+                            textarea.style.height = 'auto';
+                            textarea.style.height = textarea.scrollHeight + 'px';
+                        }
+                    });
+                }
+
+                if(btnPeq) btnPeq.addEventListener('click', () => { cambiarClase('tamano-pequeno'); /* asegurar ajuste */ ajustarAltura(); });
+                if(btnMed) btnMed.addEventListener('click', () => { cambiarClase('tamano-mediano'); ajustarAltura(); });
+                if(btnGran) btnGran.addEventListener('click', () => { cambiarClase('tamano-grande'); ajustarAltura(); });
+                if(btnAuto) btnAuto.addEventListener('click', resetearAuto);
+
+                if(textarea){
+                    textarea.addEventListener('input', ajustarAltura, { passive: true });
+                    // ajustar al cargar (usar rAF para no bloquear el paint)
+                    requestAnimationFrame(ajustarAltura);
+                }
+            })();
+        })();
+    </script>
+
 </body>
 </html>
