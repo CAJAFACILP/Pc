@@ -1,255 +1,641 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html, body {
-    height: 100%;
+/* CONTENEDOR PRINCIPAL – fondo suave estilo app */
+.app-container {
+    width: 100%;
+    max-width: 100%; /* responsive para todas las pantallas */
+    margin: auto;
+    min-height: 100vh;
+    background: #fdd7b8; /* gris claro profesional */
+    display: flex;
+    flex-direction: column;
     font-family: Arial, sans-serif;
-    background-color: hsl(18, 45%, 94%);
-    color: #333;
-    line-height: 1.6;
+    border-radius: 0px;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    padding: 0;
 }
 
-/* Estructura principal del cuerpo */
-body {
+/* Limitar ancho en PC */
+@media (min-width: 1024px) {
+    .app-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        border-radius: 0px;
+    }
+}
+
+/* Mobile S (320px) */
+@media (max-width: 360px) {
+    .app-container {
+        max-width: 100%;
+        border-radius: 0px;
+    }
+}
+
+/* Mobile M (375px) */
+@media (max-width: 480px) {
+    .app-container {
+        max-width: 100%;
+        border-radius: 0px;
+    }
+}
+
+/* BARRA SUPERIOR VERDE OSCURO – estilo financiero */
+.top-bar {
+    background: #1c6b8b;
+    padding: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* Para pantallas grandes */
+@media (min-width: 768px) {
+    .top-bar {
+        padding: 22px 30px;
+        font-size: 24px;
+    }
+}
+
+/* Mobile S (320px) */
+@media (max-width: 360px) {
+    .top-bar {
+        padding: 12px;
+        font-size: 16px;
+    }
+}
+
+/* Mobile M (375px) */
+@media (max-width: 480px) {
+    .top-bar {
+        padding: 14px;
+        font-size: 16px;
+    }
+}
+
+/* Ícono menú */
+.menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* ZONA DE CONTENIDO */
+.content {
+    padding: 20px;
+    flex: 1;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+/* Layout grid para pantallas grandes */
+@media (min-width: 768px) {
+    .content {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 30px;
+        gap: 40px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .content {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 40px;
+        gap: 50px;
+    }
+}
+
+/* Mobile S (320px) */
+@media (max-width: 360px) {
+    .content {
+        padding: 12px;
+    }
+}
+
+/* Mobile M (375px) */
+@media (max-width: 480px) {
+    .content {
+        padding: 15px;
+    }
+}
+
+/* TARJETAS PRINCIPALES */
+.card {
+    
+    padding: 25px 0;
+    border-radius: 20px;
+    margin-bottom: 0;
+    text-align: center;
+    color: #fff;
+    font-size: 22px;
+    font-weight: bold;
+    position: relative;
+    box-shadow: 0px 4px 14px rgba(0,0,0,0.15);
     display: flex;
     flex-direction: column;
 }
 
-/* Estilos de la cabecera */
-.headweb {
-    background-color: #ffffff;
-    text-align: center;
-    font-size: 40px;
+/* Estilos mejorados para PC */
+@media (min-width: 768px) {
+    .card {
+        padding: 30px 20px;
+        border-radius: 18px;
+        font-size: 26px;
+        box-shadow: 0px 6px 18px rgba(0,0,0,0.12);
+    }
 }
 
-.logo {
-    width: auto;
-    height: auto;
+@media (min-width: 1200px) {
+    .card {
+        padding: 40px 25px;
+        border-radius: 22px;
+        font-size: 28px;
+        box-shadow: 0px 8px 24px rgba(0,0,0,0.15);
+    }
 }
 
-/* Contenedor principal */
-.main-container {
-    flex: 1;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 20px;
+/* Mobile S (320px) */
+@media (max-width: 360px) {
+    .card {
+        padding: 18px 0;
+        margin-bottom: 14px;
+        font-size: 18px;
+    }
 }
 
-/* Configuración de los contenedores */
-.container1, .container2 {
-    background-color: #ecddd3;
-    padding: 20px;
-    border: 2px solid #000000;
-    margin-bottom: 20px;
+/* Mobile M (375px) */
+@media (max-width: 480px) {
+    .card {
+        padding: 20px 0;
+        margin-bottom: 16px;
+        font-size: 20px;
+    }
 }
 
-.container1 {
-    width: calc(70% - 30px);
-}
+/* COLORES CAJA FÁCIL */
+.green { background: #00A86B; }          /* verde principal */
+.blue  { background: #0f70eb; color: #0A2E3F; } /* azul financiero */
+.dark  { background: #0C3B5B; }          /* azul oscuro para contraste */
+.red { background: #d35050; }          /* rojo principal */
 
-.container2 {
-    width: calc(30% - 10px);
-}
-
-/* Estilo para el área de texto */
-#notas {
-    width: 100%;
-    max-width: 60%;
-    min-width: 240px;
-    max-height: 1000px;
-    min-height: 200px;
-    overflow: auto;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-#notas.excedido {
-    color: red;
-}
-
-/* Estilo del calendario */
-#calendar {
-    width: 250px;
-    border: 1px solid #ccc;
-    padding: 15px;
-    background-color: #f5f5f5;
-    border-radius: 8px;
-    text-align: center;
-    margin: 20px auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-#date {
-    font-size: 18px;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-#clock {
-    font-size: 24px;
-    font-weight: bold;
+/* Entradas de valores de monedas: fondo más oscuro para mayor contraste */
+.contador-card .monedas-grid .fila input[type="number"] {
+    background-color: #ddd;
     color: #000;
+    border: 1px solid #999;
+    border-radius: 4px;
+    padding: 6px;
+    width: 80px;
 }
 
-#calendar h2 {
-    font-size: 22px;
-    margin-bottom: 15px;
-    color: #555;
+/* Ajustes responsivos para inputs de monedas */
+@media (max-width: 480px) {
+    .contador-card .monedas-grid .fila input[type="number"] {
+        width: 100%;
+        padding: 8px;
+    }
 }
 
-/* Estilo para el valor total */
-#valorTotalCentavos {
-    font-size: 24px;
+/* LOGO CAJA FÁCIL */
+.logo {
+  display: inline-block;
+  border-radius: 40px;
+  padding: 15px 30px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.caja {
+  color: #ffffff;
+  margin-right: 8px;
+}
+
+.facil {
+  background: linear-gradient(90deg, #da8244, #df6f2e);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.logo::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  width: 80%;
+  height: 6px;
+  background: linear-gradient(90deg, #00b4d8, #90e0ef);
+  border-radius: 3px;
+}
+
+/* TITULOS DENTRO DE RECTÁNGULOS OSCUROS */
+.card h2 {
+    display: block;
+    width: 100%;               /* ocupa todo el ancho del card */
+    margin: 0 auto 12px auto;  /* separacion inferior */
+    padding: 8px 0;
+    color: #ffffff;
+    font-size: 1.2em;
     font-weight: bold;
+    box-sizing: border-box;
+    border-radius: 6px;
+}
+/* tonos más oscuros de cada color de card */
+.card.red h2   { background: #a03d3d; }
+.card.green h2 { background: #00915a; }
+.card.blue h2  { background: #0c58b3; }
+.card.dark h2  { background: #0a2e46; }
+
+
+/* SUBTARJETA BLANCA */
+.subcard {
+    
+    padding: 15px 20px;
+    display: inline-block;
+    border-radius: 10px;
+    margin-top: 12px;
+    font-size: 14px;
+    color: #333;
+    box-shadow: 0px 3px 6px rgba(0,0,0,0.2);
+}
+
+/* Mejorar para pantallas grandes */
+@media (min-width: 768px) {
+    .subcard {
+        padding: 20px 25px;
+        border-radius: 12px;
+        font-size: 15px;
+        box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
+    }
+}
+
+/* PIE DE PÁGINA */
+.footer {
+    text-align: center;
+    padding: 10px;
+    color: #888;
+    font-size: 12px;
+    background: #F0F0F0;
+}
+
+/* Estilos para el contador integrado */
+.contador-card h3{
+    margin: 0 0 10px 0;
+    font-size: 16px;
     color: #333;
 }
 
-/* Estilo para los inputs de monedas y billetes */
-input[type="number"] {
-    width: 200px;
-    height: 40px;
-    font-size: 18px;
-    font-weight: bold;
+.monedas-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 12px;
+    align-items: center;
+}
+
+/* Para tablets y pantallas medianas */
+@media (min-width: 600px) {
+    .monedas-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 12px 16px;
+    }
+}
+
+/* Para pantallas grandes */
+@media (min-width: 1200px) {
+    .monedas-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 14px 18px;
+    }
+}
+
+/* Mobile S (320px) */
+@media (max-width: 360px) {
+    .monedas-grid {
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+}
+
+/* Mobile M (375px) */
+@media (max-width: 480px) {
+    .monedas-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 6px 8px;
+    }
+}
+
+.fila{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 8px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+
+.fila label{
+    font-size: 14px;
+    color: #333;
+}
+
+.fila input[type="number"]{
+    width: 80px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
     text-align: right;
-    margin-bottom: 10px;
-    padding: 5px;
+    font-weight: bold;
 }
 
-label {
-    display: inline-block;
-    width: 250px;
+/* Aumentar tamaño en pantallas grandes */
+@media (min-width: 768px) {
+    .fila input[type="number"] {
+        width: 100px;
+        padding: 8px 10px;
+        font-size: 15px;
+    }
+}
+
+/* Mobile S (320px) */
+@media (max-width: 360px) {
+    .fila label {
+        font-size: 12px;
+    }
+    
+    .fila input[type="number"] {
+        width: 70px;
+        padding: 4px 6px;
+        font-size: 12px;
+    }
+}
+
+/* Mobile M (375px) */
+@media (max-width: 480px) {
+    .fila label {
+        font-size: 13px;
+    }
+    
+    .fila input[type="number"] {
+        width: 75px;
+        padding: 5px 7px;
+        font-size: 13px;
+    }
+}
+
+.resultado{
+    /* top margin only; horizontal margins will be negative to cancel parent padding */
+    margin: 16px -20px 0;
+    background: rgba(255,255,255,0.06);
+    padding: 12px 16px;
+    border-radius: 10px;
+    color: #0A2E3F;
+    font-weight: bold;
     font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* expand wider than subcard to cover green edges */
+    width: calc(100% + 40px);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
 }
 
-h2 {
+.resultado #valorTotalCentavos{
+    font-size: 22px;
+    margin-left: 6px;
+}
+
+/* Asegurar que la subcard conserve el ancho adecuado */
+.subcard.contador-card{
+    width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+}
+
+/* Estilos para el calendario */
+#calendar{
     text-align: center;
+    padding: 10px 12px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
 }
 
-.container {
-    width: 300px;
-    margin: 0 auto;
+#calendar h2{
+    margin: 0 0 6px 0;
+    font-size: 16px;
+    color: #d35050;
 }
 
-.total {
-    text-align: center;
-    margin-top: 20px;
+#calendar p{
+    margin: 2px 0;
+    font-size: 20px;
+    color: #333;
 }
 
-#containerTO {
-    height: auto;
-    border: 1px solid #ccc;
-    background-color: #f5f5f5;
-    margin: 40px auto 80px;
-    text-align: center;
-    font-size: 15px;
-}
-
-#valorTotalP {
+#calendar #clock{
+    font-weight: 700;
     font-size: 30px;
 }
 
-input[type="text"], input[type="number"] {
+#calendar #timezone{
+    font-size: 12px;
+    color: #666;
+}
+
+/* Título blanco específicamente en la tarjeta azul */
+.card.blue h2 {
+    color: #ffffff;
+}
+
+/* Estilos específicos para botones del cajero */
+#agregarP, #borrarListaP {
+    font-size: 1.2em; /* mayor tamaño de letra */
+    padding: 10px 20px; /* cuadro más grande */
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+#agregarP {
+    background: #0a2e46;
+    color: #fff;
+}
+#borrarListaP {
+    background: #d35050;
+    color: #fff;
+}
+#agregarP:hover, #borrarListaP:hover {
+    filter: brightness(0.9);
+}
+
+/* ESTILOS DEL OVERLAY DE MENÚ */
+.menu-overlay{
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.35); /* backdrop semitransparente */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 180ms ease;
+    z-index: 1200;
+}
+.menu-overlay.open{ opacity: 1; pointer-events: auto; }
+
+.menu-inner{
+    width: 92%;
+    max-width: 420px;
+    background: #ffd8b3; /* naranja claro */
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    position: relative;
+}
+
+.menu-close{
+    position: absolute;
+    right: 10px;
+    top: 8px;
+    background: transparent;
+    border: none;
+    font-size: 44px;
+    cursor: pointer;
+}
+
+.menu-buttons{ display:flex; flex-direction:column; gap:24px; margin-top:12px; }
+.menu-btn{
+    display:block;
+    width:100%;
+    padding:36px 16px;
+    border-radius: 12px;
+    border: none;
+    font-size: 32px;
+    font-weight: bold;
+    background: #ff8c42; /* naranja más intenso para botones */
+    color: white;
+    cursor: pointer;
+    text-align: left;
+}
+.menu-btn-save{
+    background: #188518; /* verde para guardar */
+}
+.menu-btn:last-child{ margin-bottom: 0; }
+
+/* botón estilo en focus para accesibilidad */
+.menu-btn:focus, .menu-close:focus{ outline: 3px solid rgba(255,140,66,0.25); outline-offset: 2px; }
+
+/* Estilos para resultados del contador personalizado (card blue) */
+.personal-results{
+    background: #ffffff;
+    padding: 10px 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    margin-top: 8px;
+}
+
+.personal-results ul{
+    list-style: none;
+    padding: 6px 8px;
+    margin: 0 0 8px 0;
+    /* Permitir que la lista crezca y expanda el contenedor en lugar de mostrar scroll */
+    max-height: none;
+    overflow-y: visible;
+}
+
+.personal-results li{
+    padding: 4px 0;
+    border-bottom: 1px dashed #eee;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Estilos para inputs del CAJERO */
+#contador-personalizado input {
     width: 200px;
     padding: 10px;
-    font-size: 14px;
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 14px;
-    margin: 5px;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    margin: 5px 0;
-}
-
-.imagenes {
-    font-size: 20px;
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-/* Contador de inventario */
-#contador-inventario {
-    height: auto;
-    padding: 20px;
-    background-color: #f5f5f5;
-    margin: 40px auto 80px;
-    text-align: center;
-    font-size: 15px;
-}
-
-.rectangulo {
-    width: 800px;
-    height: 600px;
-    background-color: #4CAF50;
-    border: 2px solid #000;
-    margin: 10px auto;
-}
-
-/* Elementos de la lista */
-#listaElementos li {
-    font-size: 20px;
-    font-weight: bold;
-}
-
-#cantidadTotal {
-    font-size: 15px;
-    font-weight: bold;
-}
-
-.container1 > div, .container2 > div {
-    background-color: #f5be49;
-    margin-bottom: 15px;
-    padding: 15px;
-    border: 2px solid #00000;
-    text-align: center;
-}
-
-/* Pie de página */
-.pie {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 10px;
     font-size: 18px;
-    position: sticky;
-    bottom: 0;
-    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
 }
 
-/* Ajuste de tamaños para pantallas pequeñas */
-@media (max-width: 768px) {
-    .headweb {
-        font-size: 30px;
-    }
-
-    .main-container {
-        flex-direction: column;
-    }
-
-    .container1, .container2 {
+/* Ajustes responsivos para inputs del CAJERO */
+@media (max-width: 480px) {
+    #contador-personalizado input {
         width: 100%;
-    }
-
-    .rectangulo {
-        width: 300px;
-        height: 200px;
-    }
-
-    .logo {
-        height: 140px;
+        padding: 8px;
+        font-size: 16px;
     }
 }
+
+/* ----------------- STYLES FOR NOTES BLOCK (card dark / NOTAS) ----------------- */
+.contenedor-notas{
+    width: 95%;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+textarea#notas{
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    font-size: 16px;
+    resize: vertical;
+    box-sizing: border-box;
+    /* Evitar animar dimensiones (width/height) por rendimiento. Animar solo propiedades ligeras. */
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    width: 100%;
+    height: 200px;
+}
+
+/* Aumentar tamaño en pantallas grandes */
+@media (min-width: 768px) {
+    textarea#notas {
+        padding: 18px;
+        font-size: 17px;
+        height: 250px;
+    }
+}
+
+@media (min-width: 1200px) {
+    textarea#notas {
+        padding: 20px;
+        font-size: 18px;
+        height: 300px;
+    }
+}
+
+/* Respetar la preferencia por reducir movimiento */
+@media (prefers-reduced-motion: reduce) {
+    textarea#notas { transition: none; }
+}
+
+/* Tamaños predefinidos (clases aplicadas por JS) */
+.tamano-pequeno{ height:200px !important; }
+.tamano-mediano{ height:400px !important; }
+.tamano-grande{ height:1600px !important; }
+
+
+@media (min-width: 768px){
+    /* Usar min() para que el ancho no exceda el contenedor padre */
+    .tamano-pequeno{ width: min(400px, 100% ) !important; max-width: 100%; margin: 0 auto; display:block; box-sizing: border-box; }
+    .tamano-mediano{ width: min(700px, 100% ) !important; max-width: 100%; margin: 0 auto; display:block; box-sizing: border-box; }
+    .tamano-grande{ width:100% !important; box-sizing: border-box; }
+}
+
+.botones-container{ margin-top: 15px; display:flex; flex-wrap:wrap; justify-content:center; gap:8px; }
+.botones-container button{ padding: 8px 12px; margin: 0; cursor: pointer; max-width: 160px; box-sizing: border-box; }
+
+/* Ajuste para que .subcard no limite el ancho del textarea */
+.card.dark .subcard{ display: block; text-align: center; }
